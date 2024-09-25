@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#C0F3ED</color>
+    <color name="grey">#D7D4D4</color>
+    <!-- Màu mặc định cho icon -->
+    <color name="default_icon_color">#808080</color> <!-- Màu xám -->
+
+    <!-- Màu khi icon được chọn -->
+    <color name="selected_icon_color">#FF5722</color> <!-- Màu cam -->
+</resources>

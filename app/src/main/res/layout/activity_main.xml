@@ -1,0 +1,181 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- Fragment Container View -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layoutNavBottomUser" />
+
+    <!-- Navigation Bottom User -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layoutNavBottomUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="10dp"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <!-- Nút Trang Chủ -->
+            <LinearLayout
+                android:id="@+id/layoutTrangChuUser"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iconTrangChu"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_trang_chu"
+                    android:tint="@color/default_icon_color" />
+            </LinearLayout>
+
+            <!-- Nút Giỏ Hàng -->
+            <LinearLayout
+                android:id="@+id/layouGioiHangUser"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iconGioHang"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_gio_hang"
+                    android:tint="@color/default_icon_color" />
+            </LinearLayout>
+
+            <!-- Nút Đơn Đặt -->
+            <LinearLayout
+                android:id="@+id/layoutDonDatUser"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iconDonDat"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_hoa_don"
+                    android:tint="@color/default_icon_color" />
+            </LinearLayout>
+
+            <!-- Nút Tài Khoản -->
+            <LinearLayout
+                android:id="@+id/layoutTaiKhoanUser"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iconTaiKhoan"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_tai_khoan_nav_bottom"
+                    android:tint="@color/default_icon_color" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Navigation Bottom Admin -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layoutNavBottomAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="10dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <!-- Nút Trang Chủ Admin -->
+            <LinearLayout
+                android:id="@+id/layoutTrangChuAdmin"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iconTrangChuAdmin"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_trang_chu"
+                    android:tint="@color/default_icon_color" />
+            </LinearLayout>
+
+            <!-- Nút Đơn Đặt Admin -->
+            <LinearLayout
+                android:id="@+id/layoutDonDatAdmin"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iconDonDatAdmin"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_hoa_don"
+                    android:tint="@color/default_icon_color" />
+            </LinearLayout>
+
+            <!-- Nút Tài Khoản Admin -->
+            <LinearLayout
+                android:id="@+id/layoutTaiKhoanAdmin"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/iconTaiKhoanAdmin"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/icon_tai_khoan_nav_bottom"
+                    android:tint="@color/default_icon_color" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
