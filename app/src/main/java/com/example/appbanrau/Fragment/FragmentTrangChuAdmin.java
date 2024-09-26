@@ -1,6 +1,7 @@
 package com.example.appbanrau.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,39 +15,34 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
+import com.example.appbanrau.Adapter.AdapterSanPhamAdmin;
+import com.example.appbanrau.DAO.TrangChuAdminDAO;
+import com.example.appbanrau.DTO.SanPhamAdminDTO;
+import com.example.appbanrau.R;
+import com.example.appbanrau.SuaSanPhamAdmin;
+import com.example.appbanrau.ThemSanPhamAdmin;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-import com.example.appbanrau.Adapter.AdapterFoodAdmin;
-import com.example.appbanrau.Adapter.AdapterSanPhamCuAdmin;
-import com.example.appbanrau.Adapter.AdapterSanPhamRauAdmin;
-import com.example.appbanrau.Adapter.AdapterViewPagerTrangChu;
-import com.example.appbanrau.DAO.DanhSachSanPhamDAO;
-import com.example.appbanrau.DAO.TrangChuAdminDAO;
-import com.example.appbanrau.DTO.SanPhamRauAdminDTO;
-import com.example.appbanrau.R;
+public class FragmentTrangChuAdmin extends Fragment implements AdapterSanPhamAdmin.SanPhamAdminInterface {
 
-public class FragmentTrangChuAdmin extends Fragment {
-
-    private TabLayout tabLayoutAdmin;
-    private ViewPager2 viewPager2Admin;
-    private AdapterViewPagerTrangChu adapterViewPagerTrangChu;
-    private TextView tvTenTaiKhoan;
-    private EditText edSeachSanPham;
+    private RecyclerView recyclerSanPhamAdmin;
+    private EditText edSeachAdmin;
+    private TextView tvTenTaiKhoanAdmin;
+    private FloatingActionButton fltAddSanPhamAdmin;
     private TrangChuAdminDAO trangChuAdminDAO;
-    private DanhSachSanPhamDAO danhSachSanPhamDAO;
+    private AdapterSanPhamAdmin adapterSanPhamAdmin;
+    private ArrayList<SanPhamAdminDTO> listSanPham;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frg_trang_chu_admin, container, false);
-
-
-        return view;
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.frg_trang_chu_admin, container, false);
     }
 
     @Override
@@ -54,112 +50,73 @@ public class FragmentTrangChuAdmin extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         trangChuAdminDAO = new TrangChuAdminDAO(getContext());
 
-        edSeachSanPham = view.findViewById(R.id.edSeachAdmin);
-        tvTenTaiKhoan = view.findViewById(R.id.tvTenTaiKhoanAdmin);
-        tabLayoutAdmin = view.findViewById(R.id.tabLayoutAdmin);
-        viewPager2Admin = view.findViewById(R.id.viewPager2Admin);
-        adapterViewPagerTrangChu = new AdapterViewPagerTrangChu(this);
-        viewPager2Admin.setAdapter(adapterViewPagerTrangChu);
+        // Khởi tạo các View
+        edSeachAdmin = view.findViewById(R.id.edSeachAdmin);
+        tvTenTaiKhoanAdmin = view.findViewById(R.id.tvTenTaiKhoanAdmin);
+        recyclerSanPhamAdmin = view.findViewById(R.id.recyclerSanPhamAdmin);
+        fltAddSanPhamAdmin = view.findViewById(R.id.fltAddSanPhamAdmin);
 
-
+        // Hiển thị tên đăng nhập
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("USER", Context.MODE_PRIVATE);
         String tenDangNhap = sharedPreferences.getString("tenDangNhap", "");
-        tvTenTaiKhoan.setText("Hi, " + tenDangNhap);
+        tvTenTaiKhoanAdmin.setText("Hi, " + tenDangNhap);
 
+        // Khởi tạo RecyclerView
+        recyclerSanPhamAdmin.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        listSanPham = trangChuAdminDAO.getDSSanPhamAdmin(); // Lấy tất cả sản phẩm
+        adapterSanPhamAdmin = new AdapterSanPhamAdmin(listSanPham, getContext(), this);
+        recyclerSanPhamAdmin.setAdapter(adapterSanPhamAdmin);
 
-        new TabLayoutMediator(tabLayoutAdmin, viewPager2Admin, (tab, position) -> {
-            switch (position) {
-                case 0:
-                    tab.setText("Rau");
-                    break;
-                case 1:
-                    tab.setText("Củ");
-                    break;
-                case 2:
-                    tab.setText("Quả");
-                    break;
+        // Thêm sản phẩm
+        fltAddSanPhamAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ThemSanPhamAdmin.class);
+                startActivity(intent);
             }
-        }).attach();
+        });
 
-        edSeachSanPham.addTextChangedListener(new TextWatcher() {
+        // Chức năng tìm kiếm
+        edSeachAdmin.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                // Không cần xử lý
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                if (tabLayoutAdmin.getSelectedTabPosition() == 0) {
-
-                    String tenSpRau = s.toString();
-                    timKiemSanPhamRau(tenSpRau);
-
-                } else if (tabLayoutAdmin.getSelectedTabPosition() == 1) {
-
-                    String tenSpCu = s.toString();
-                    timKiemSanPhamCu(tenSpCu);
-
-                } else if (tabLayoutAdmin.getSelectedTabPosition() == 2) {
-
-                    String tenSpQua = s.toString();
-                    timKiemSanPhamQua(tenSpQua);
-
-                }
-
-
+                filterSanPham(s.toString());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                // Không cần xử lý
             }
         });
-
-
     }
 
-    private void timKiemSanPhamQua(String tenSpQua) {
-
-        ArrayList<SanPhamRauAdminDTO> list = trangChuAdminDAO.timKiemQua(tenSpQua);
-
-        if (list.size() > 0) {
-
-            AdapterFoodAdmin adapterFoodAdmin = new AdapterFoodAdmin(list, getContext());
-            FragmentQuaTrangChuAdmin.recyclerViewQuaAdmin.setAdapter(adapterFoodAdmin);
-            adapterFoodAdmin.notifyDataSetChanged();
-
-        }
-
-
+    /**
+     * Lọc danh sách sản phẩm dựa trên từ khóa tìm kiếm.
+     *
+     * @param query Từ khóa tìm kiếm.
+     */
+    private void filterSanPham(String query) {
+        ArrayList<SanPhamAdminDTO> filteredList = trangChuAdminDAO.timKiemSanPham(query);
+        adapterSanPhamAdmin.updateList(filteredList);
     }
 
-    private void timKiemSanPhamCu(String tenSpCu) {
-        ArrayList<SanPhamRauAdminDTO> list = trangChuAdminDAO.timKiemCu(tenSpCu);
-
-        if (list.size() > 0) {
-
-            AdapterSanPhamCuAdmin adapterSanPhamCuAdmin = new AdapterSanPhamCuAdmin(list, getContext());
-            FragmentCuTrangChuAdmin.recyclerViewCuAdmin.setAdapter(adapterSanPhamCuAdmin);
-            adapterSanPhamCuAdmin.notifyDataSetChanged();
-
-        }
-
-
+    @Override
+    public void updateSanPham(SanPhamAdminDTO dto) {
+        Intent intent = new Intent(getActivity(), SuaSanPhamAdmin.class);
+        intent.putExtra("dto", dto);
+        startActivity(intent);
     }
 
-    private void timKiemSanPhamRau(String tenSpRau) {
-
-        ArrayList<SanPhamRauAdminDTO> list = trangChuAdminDAO.timKiemRau(tenSpRau);
-
-        if (list.size() > 0) {
-
-            AdapterSanPhamRauAdmin adapterSanPhamRauAdmin = new AdapterSanPhamRauAdmin(list, getContext());
-            FragmentRauTrangChuAdmin.recyclerViewRauAdmin.setAdapter(adapterSanPhamRauAdmin);
-            adapterSanPhamRauAdmin.notifyDataSetChanged();
-
-        }
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Cập nhật danh sách sản phẩm khi trở về fragment
+        listSanPham = trangChuAdminDAO.getDSSanPhamAdmin();
+        adapterSanPhamAdmin.updateList(listSanPham);
     }
 }

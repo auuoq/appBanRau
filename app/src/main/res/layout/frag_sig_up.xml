@@ -23,7 +23,7 @@
             android:fontFamily="serif"
             android:drawableStart="@drawable/icon_ten_tai_khoan_login_sigup"
             android:drawablePadding="10dp"
-            android:background="@color/white"
+            android:background="@drawable/edittext_background"
             android:padding="20dp"
             android:id="@+id/edTenDangNhapSigUp"/>
 
@@ -48,7 +48,7 @@
             android:fontFamily="serif"
             android:drawableStart="@drawable/icon_mat_khau_login_sigup"
             android:drawablePadding="10dp"
-            android:background="@color/white"
+            android:background="@drawable/edittext_background"
             android:inputType="textPassword"
             android:padding="20dp"
             android:id="@+id/edMatKhauSigUp"/>
@@ -74,7 +74,7 @@
             android:fontFamily="serif"
             android:drawableStart="@drawable/icon_mat_khau_login_sigup"
             android:drawablePadding="10dp"
-            android:background="@color/white"
+            android:background="@drawable/edittext_background"
             android:inputType="textPassword"
             android:padding="20dp"
             android:id="@+id/edNhapLaiMatKhauSigUp"/>

@@ -2,7 +2,7 @@ package com.example.appbanrau.DTO;
 
 import java.io.Serializable;
 
-public class SanPhamRauAdminDTO implements Serializable {
+public class SanPhamAdminDTO implements Serializable {
     private int id_san_pham;
     private  int id_loai_san_pham;
     private String ten_san_pham;
@@ -14,10 +14,10 @@ public class SanPhamRauAdminDTO implements Serializable {
     private String loai;
 
 
-    public SanPhamRauAdminDTO() {
+    public SanPhamAdminDTO() {
     }
 
-    public SanPhamRauAdminDTO(int id_san_pham, int id_loai_san_pham, String ten_san_pham, int don_gia, String img_url, String mo_ta, int so_luong,String nhacungcap, String loai) {
+    public SanPhamAdminDTO(int id_san_pham, int id_loai_san_pham, String ten_san_pham, int don_gia, String img_url, String mo_ta, int so_luong, String nhacungcap, String loai) {
         this.id_san_pham = id_san_pham;
         this.id_loai_san_pham = id_loai_san_pham;
         this.ten_san_pham = ten_san_pham;
@@ -29,7 +29,7 @@ public class SanPhamRauAdminDTO implements Serializable {
         this.loai = loai;
     }
 
-    public SanPhamRauAdminDTO(String ten_san_pham, int don_gia, String img_url, String mo_ta, String nhacungcap, String loai) {
+    public SanPhamAdminDTO(String ten_san_pham, int don_gia, String img_url, String mo_ta, String nhacungcap, String loai) {
         this.ten_san_pham = ten_san_pham;
         this.don_gia = don_gia;
         this.img_url = img_url;

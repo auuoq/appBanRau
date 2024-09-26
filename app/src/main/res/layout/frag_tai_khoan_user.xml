@@ -34,11 +34,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:fontFamily="serif"
-        android:text="Nguyễn Tát Công"
-        android:textSize="20dp"/>
+        android:text="Nguyễn Tiến Đạt"
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
 
 

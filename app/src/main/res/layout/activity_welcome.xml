@@ -9,24 +9,20 @@
     tools:context=".WelcomeActivity"
     android:background="@color/white">
 
-
+    <!-- Logo app -->
     <ImageView
+        android:layout_marginTop="100dp"
         android:layout_width="270dp"
         android:layout_height="270dp"
         android:src="@drawable/img_logo_app"
-        android:adjustViewBounds="true"
-        app:elevation="20dp"
+        android:adjustViewBounds="true" />
 
-        />
+
     <ImageView
-        android:layout_width="270dp"
-        android:layout_height="270dp"
-        android:src="@drawable/img_logo_tlu"
+        android:layout_width="180dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="150dp"
         android:adjustViewBounds="true"
-        app:elevation="20dp"
-
-        />
-
-
+        android:src="@drawable/img_logo_tlu" />
 
 </LinearLayout>

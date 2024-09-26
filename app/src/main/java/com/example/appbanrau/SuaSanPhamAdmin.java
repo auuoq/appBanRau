@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import com.example.appbanrau.DAO.TrangChuAdminDAO;
 import com.example.appbanrau.DBHelper.MyDBHelper;
-import com.example.appbanrau.DTO.SanPhamRauAdminDTO;
+import com.example.appbanrau.DTO.SanPhamAdminDTO;
 
 public class SuaSanPhamAdmin extends AppCompatActivity {
     EditText edtSuatensp, edtSuaGiasp, edtSuaNhaCungCap, edtSuaMoTa;
@@ -25,7 +25,7 @@ public class SuaSanPhamAdmin extends AppCompatActivity {
     Spinner spnCategorySuaSp;
     ImageView ivBack;
 
-    private SanPhamRauAdminDTO dto;
+    private SanPhamAdminDTO dto;
 
     private TrangChuAdminDAO dao;
 
@@ -118,7 +118,7 @@ public class SuaSanPhamAdmin extends AppCompatActivity {
     private void getDataIntent() {
         Intent intent = getIntent();
         if (intent != null) {
-            dto = (SanPhamRauAdminDTO) intent.getSerializableExtra("dto");
+            dto = (SanPhamAdminDTO) intent.getSerializableExtra("dto");
             edtSuatensp.setText(dto.getTen_san_pham());
             edtSuaGiasp.setText(String.valueOf(dto.getDon_gia()));
             edtSuaNhaCungCap.setText(dto.getNhacungcap());

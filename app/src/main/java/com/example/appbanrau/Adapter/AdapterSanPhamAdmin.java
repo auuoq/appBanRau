@@ -17,47 +17,51 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appbanrau.ChiTietSanPhamActivity;
+import com.example.appbanrau.DTO.SanPhamAdminDTO;
+import com.example.appbanrau.R;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import com.example.appbanrau.ChiTietSanPhamActivity;
-import com.example.appbanrau.DTO.SanPhamRauAdminDTO;
-import com.example.appbanrau.R;
+public class AdapterSanPhamAdmin extends RecyclerView.Adapter<AdapterSanPhamAdmin.ViewHolderAdmin> {
+    private ArrayList<SanPhamAdminDTO> list;
+    private Context context;
+    private SanPhamAdminInterface listener;
+    private DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
 
-public class AdapterSanPhamCuAdmin extends RecyclerView.Adapter<AdapterSanPhamCuAdmin.ViewHolderCu> {
-    ArrayList<SanPhamRauAdminDTO> list;
-    Context context;
-    private AdapterSanPhamRauAdmin.SanPhamAdminInterface listener;
-    DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-
-    public AdapterSanPhamCuAdmin(ArrayList<SanPhamRauAdminDTO> list, Context context, AdapterSanPhamRauAdmin.SanPhamAdminInterface listener) {
+    public AdapterSanPhamAdmin(ArrayList<SanPhamAdminDTO> list, Context context, SanPhamAdminInterface listener) {
         this.list = list;
         this.context = context;
         this.listener = listener;
     }
 
-    public AdapterSanPhamCuAdmin(ArrayList<SanPhamRauAdminDTO> list, Context context) {
-        this.list = list;
-        this.context = context;
+    /**
+     * Cập nhật danh sách sản phẩm và làm mới RecyclerView.
+     *
+     * @param newList Danh sách sản phẩm mới.
+     */
+    public void updateList(ArrayList<SanPhamAdminDTO> newList) {
+        list = newList;
+        notifyDataSetChanged();
     }
 
     public interface SanPhamAdminInterface {
-        void updateSanPham(SanPhamRauAdminDTO dto);
+        void updateSanPham(SanPhamAdminDTO dto);
     }
 
     @NonNull
     @Override
-    public ViewHolderCu onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolderAdmin onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.item_rau_danh_sach_san_pham_admin, parent, false);
-        return new ViewHolderCu(view);
-
+        View view = inflater.inflate(R.layout.item_danh_sach_san_pham_admin, parent, false);
+        return new ViewHolderAdmin(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolderCu holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull ViewHolderAdmin holder, @SuppressLint("RecyclerView") int position) {
 
-        SanPhamRauAdminDTO id = list.get(position);
+        SanPhamAdminDTO id = list.get(position);
 
         String nameImg = list.get(position).getImg_url();
         int resourceImg = ((Activity) context).getResources().getIdentifier(nameImg, "drawable", ((Activity) context).getPackageName());
@@ -65,7 +69,7 @@ public class AdapterSanPhamCuAdmin extends RecyclerView.Adapter<AdapterSanPhamCu
 
         String base64 = list.get(position).getImg_url();
         try {
-            byte[] imageBytes = Base64.decode(base64, Base64.DEFAULT);
+            byte[] imageBytes = android.util.Base64.decode(base64, Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
 
             if (bitmap != null) {
@@ -78,7 +82,7 @@ public class AdapterSanPhamCuAdmin extends RecyclerView.Adapter<AdapterSanPhamCu
         holder.tvGiaSanPhamDanhSachSanPhamAdmin.setText(decimalFormat.format(list.get(position).getDon_gia()) + " VND / 1kg");
         holder.tvTenDanhSachSanPhamAdmin.setText(list.get(position).getTen_san_pham());
 
-        holder.ivSua.setOnClickListener(new View.OnClickListener() {
+        holder.tvSuaSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Intent intent = new Intent(context, SuaSanPhamAdmin.class);
@@ -88,7 +92,7 @@ public class AdapterSanPhamCuAdmin extends RecyclerView.Adapter<AdapterSanPhamCu
             }
         });
 
-        //Xem chi tiết sản phâm
+        //Xem chi tiết sản phẩm
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,19 +127,21 @@ public class AdapterSanPhamCuAdmin extends RecyclerView.Adapter<AdapterSanPhamCu
         return list.size();
     }
 
-    public class ViewHolderCu extends RecyclerView.ViewHolder {
-        ImageView imgDanhSachSanPhamAdmin, ivSua;
-        TextView tvTenDanhSachSanPhamAdmin, tvGiaSanPhamDanhSachSanPhamAdmin;
+    public class ViewHolderAdmin extends RecyclerView.ViewHolder {
+        ImageView imgDanhSachSanPhamAdmin;
+        TextView tvTenDanhSachSanPhamAdmin, tvGiaSanPhamDanhSachSanPhamAdmin, tvSuaSanPham;
 
 
-        public ViewHolderCu(@NonNull View itemView) {
+        public ViewHolderAdmin(@NonNull View itemView) {
             super(itemView);
-
             imgDanhSachSanPhamAdmin = itemView.findViewById(R.id.imgDanhSachSanPhamAdmin);
             tvTenDanhSachSanPhamAdmin = itemView.findViewById(R.id.tvTenDanhSachSanPhamAdmin);
             tvGiaSanPhamDanhSachSanPhamAdmin = itemView.findViewById(R.id.tvGiaSanPhamDanhSachSanPhamAdmin);
-            ivSua = itemView.findViewById(R.id.ivIconSuaItem);
+            tvSuaSanPham = itemView.findViewById(R.id.tvSuaSanPham);
+
 
         }
     }
+
+
 }
