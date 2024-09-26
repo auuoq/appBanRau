@@ -75,7 +75,7 @@ public class AdapterTrangChuUser extends RecyclerView.Adapter<AdapterTrangChuUse
 
         gioHangDAO = new GioHangDAO(context);
         listGioHang = gioHangDAO.getAll();
-        holder.ivIconGioHang.setOnClickListener(new View.OnClickListener() {
+        holder.tvThemVaoGio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -149,8 +149,8 @@ public class AdapterTrangChuUser extends RecyclerView.Adapter<AdapterTrangChuUse
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView ivAnhSanPham, ivIconGioHang;
-        TextView tvTenSanPham, tvGiaSanPham;
+        ImageView ivAnhSanPham;
+        TextView tvTenSanPham, tvGiaSanPham, tvThemVaoGio;
         CardView layoutItem;
 
 
@@ -158,7 +158,7 @@ public class AdapterTrangChuUser extends RecyclerView.Adapter<AdapterTrangChuUse
             super(itemView);
             layoutItem = itemView.findViewById(R.id.layoutItemTrangChu);
             ivAnhSanPham = itemView.findViewById(R.id.imgSanPhamTrangChu);
-            ivIconGioHang = itemView.findViewById(R.id.ivIconGioHangItem);
+            tvThemVaoGio = itemView.findViewById(R.id.tvThemVaoGio);
             tvGiaSanPham = itemView.findViewById(R.id.tvGiaSanPhamItemTrangChu);
             tvTenSanPham = itemView.findViewById(R.id.tvTenSanPhamItemTrangChu);
 

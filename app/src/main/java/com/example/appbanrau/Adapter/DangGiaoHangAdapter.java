@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import com.example.appbanrau.ChiTietDonDatAdminActivity;
 import com.example.appbanrau.DAO.DonDatUserDAO;
 import com.example.appbanrau.DTO.DonDatUserDTO;
 import com.example.appbanrau.R;
@@ -56,22 +55,6 @@ public class DangGiaoHangAdapter extends RecyclerView.Adapter<DangGiaoHangAdapte
         holder.txtDanhSachSanPhamAdmin.setText("" + list.get(position).getTenSanPham());
         holder.txtTenKhachHangAdmin.setText("Tên khách hàng: " + list.get(position).getTenKhachHang());
         holder.txtTrangThaiAdmin.setText(list.get(position).getTrangThai());
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ChiTietDonDatAdminActivity.class);
-                intent.putExtra("idHoaDon", id.getId());
-                intent.putExtra("tenKhach", id.getTenKhachHang());
-                intent.putExtra("soDienThoai", id.getSoDienThoai());
-                intent.putExtra("diaChi", id.getDiaChi());
-                intent.putExtra("tenSanPham", id.getTenSanPham());
-                intent.putExtra("tongTien", id.getTongTien());
-                intent.putExtra("ngayDat", id.getNgayDat());
-                intent.putExtra("trangThai", id.getTrangThai());
-                context.startActivity(intent);
-            }
-        });
 
         holder.btnXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override

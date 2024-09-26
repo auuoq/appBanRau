@@ -29,7 +29,6 @@ import com.example.appbanrau.Adapter.AdapterTrangChuUser;
 import com.example.appbanrau.DAO.SanPhamTrangChuDAO;
 import com.example.appbanrau.DTO.SanPhamTrangChuUserDTO;
 import com.example.appbanrau.DTO.SliderDTO;
-import com.example.appbanrau.DanhSachSanPhamUseActivity;
 import com.example.appbanrau.R;
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -55,7 +54,6 @@ public class FragTrangChuUser extends Fragment {
     @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        tvXemThem = view.findViewById(R.id.tvXemThem);
         tvName = view.findViewById(R.id.tvNameTrangChuUser);
         viewPager2 = view.findViewById(R.id.viewPager2TrangChuUser);
         circleIndicator3 = view.findViewById(R.id.ci3);
@@ -85,25 +83,11 @@ public class FragTrangChuUser extends Fragment {
         viewPager2.setPageTransformer(compositePageTransformer);
 
 
-
-        //setOnclick cho textView xem them
-        tvXemThem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(getContext(), DanhSachSanPhamUseActivity.class));
-//                getActivity().finish();
-
-            }
-        });
-
-
-
         //Set Data mẫu
         list = sanPhamTrangChuDAO.getAll();
         adapterTrangChuUser = new AdapterTrangChuUser(getContext(),list);
         GridLayoutManager gridLayoutManager =
-                new GridLayoutManager(getContext(),2
+                new GridLayoutManager(getContext(),1
                         ,GridLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapterTrangChuUser);

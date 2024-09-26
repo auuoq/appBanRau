@@ -1,31 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:layout_margin="8dp"
     android:background="@color/white"
     android:id="@+id/layoutSRL">
 
-    <!-- Layout item delete -->
-    <LinearLayout
-        android:id="@+id/layoutDelete"
-        android:layout_width="70dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="@color/white">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="18dp"
-            android:src="@drawable/icon_delete_gio_hang" />
-    </LinearLayout>
-
     <!-- Main content layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         style="@style/CardView"
         android:background="@color/white"
@@ -50,10 +36,11 @@
 
         <!-- Text section -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginStart="15dp">
+            android:layout_marginStart="15dp"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -85,10 +72,10 @@
 
         <!-- Quantity section -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center|right">
+            android:gravity="center">
 
             <TextView
                 android:layout_width="30dp"
@@ -118,4 +105,26 @@
         </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+    <!-- Layout item delete - placed at the bottom -->
+    <LinearLayout
+        android:id="@+id/layoutDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/icon_delete_gio_hang" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xóa"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

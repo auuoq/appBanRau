@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import com.example.appbanrau.ChiTietDonDatUserActivity;
 import com.example.appbanrau.DTO.DonDatUserDTO;
 import com.example.appbanrau.R;
 
@@ -62,16 +61,6 @@ public class AdapterDonDangGiaoUser extends RecyclerView.Adapter<AdapterDonDangG
                         id.getTenSanPham(), id.getTongTien(), id.getNgayDat(), id.getTrangThai()
 
                 );
-                Intent intent = new Intent(((Activity) context), ChiTietDonDatUserActivity.class);
-                intent.putExtra("idHoaDon", id.getId());
-                intent.putExtra("tenKhach", id.getTenKhachHang());
-                intent.putExtra("soDienThoai", id.getSoDienThoai());
-                intent.putExtra("diaChi", id.getDiaChi());
-                intent.putExtra("tenSanPham", id.getTenSanPham());
-                intent.putExtra("tongTien", id.getTongTien());
-                intent.putExtra("ngayDat", id.getNgayDat());
-                intent.putExtra("trangThai",id.getTrangThai());
-                ((Activity) context).startActivity(intent);
             }
         });
 
